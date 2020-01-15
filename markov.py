@@ -46,6 +46,7 @@ def make_chains(text_string):
 
     chains = {}
     text_list = text_string.split() 
+    text_list.append(None)
 
     # your code goes here
     for word in range(len(text_list) - 2):
@@ -69,14 +70,21 @@ def make_chains(text_string):
 def make_text(chains):
     """Return text from chains."""
 
-    words = []
+    keys = choice(list(chains.keys()))
+    words = [keys[0], keys[1]]
+    word = choice(chains[keys])
 
     # your code goes here
-    for key in chains:
-        value = chains[key]
-        new_key = key + random.choice(value)
-        print(new_key)
-    #return " ".join(words)
+    while word is not None:
+        # if keys == ('I', 'am?'):
+        #     return False
+        keys = (keys[1], word)
+        words.append(word)
+        word = choice(chains[keys])
+
+            
+
+    return " ".join(words)
 
 
 input_path = "green-eggs.txt"
